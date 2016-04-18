@@ -6,6 +6,7 @@
 angular.module('starter', ['ionic', 'app.controllers'])
 
     .run(function ($ionicPlatform) {
+        AV.initialize('fCIw80IiWeNtPgTjeLmyXmXa', 'rdEOJVEK8XrloWjEiaYF0yjT');
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -20,7 +21,6 @@ angular.module('starter', ['ionic', 'app.controllers'])
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
-            AV.initialize('fCIw80IiWeNtPgTjeLmyXmXa', 'rdEOJVEK8XrloWjEiaYF0yjT');
         });
     })
     .config(function ($stateProvider, $urlRouterProvider) {
