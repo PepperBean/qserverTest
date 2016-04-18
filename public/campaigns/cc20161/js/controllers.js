@@ -56,7 +56,7 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
         achSvr.getAllAchs().then(function (achs) {
             $timeout(function () {
                 $scope.achs = _.map(achs, function (a) {
-                    interActiveSvr.checkAlreadyLike(a, $rootScope.user).then(function (r) {
+                    interActiveSvr.checkAlreadyLike(a, $rootScope.userInfoId).then(function (r) {
                         a.alreadyLike = r;
                     });
                     return a;

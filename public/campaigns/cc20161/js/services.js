@@ -279,14 +279,18 @@ serviceModule.factory('interActiveSvr', function ($q, modelSvr, roleSvr) {
         return q.promise;
     }
 
-    function _checkAlreadyLike(ach, user) {
+    function _checkAlreadyLike(ach, userId) {
         var q = $q.defer();
+
+        var fakeUser = new modelSvr.userInfo();
+        fakeUser.id = userId;
+
         $q(function (rev, rej) {
             if (!currentUserLikesDirty) {
                 rev(currentUserLikes);
             } else {
                 var query = new AV.Query(modelSvr.likes);
-                query.equalTo('liker', user);
+                query.equalTo('liker', fakeUser);
                 query.find().then(function (likes) {
                     currentUserLikes = likes;
                     currentUserLikesDirty = false;
