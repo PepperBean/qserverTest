@@ -54,6 +54,7 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
 
     $scope.$on('$ionicView.enter', function () {
         achSvr.getAllAchs().then(function (achs) {
+            $scope.achs = achs;
             $timeout(function () {
                 $scope.achs = _.map(achs, function (a) {
                     interActiveSvr.checkAlreadyLike(a, $rootScope.userInfoId).then(function (r) {
