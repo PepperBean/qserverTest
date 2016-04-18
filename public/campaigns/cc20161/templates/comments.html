@@ -1,0 +1,46 @@
+<ion-view view-title="ccomments" ng-style="dynHeight">
+    <ion-content class="padding appBG">
+        <div class="mCommentArea">
+            <span class="highLightText">导师评语</span>
+
+            <div class="mlides">
+                <ks-swiper-container loop="false"
+                                     show-nav-buttons="false"
+                                     slides-per-view='2'
+                                     space-between="1"
+                                     pagination-clickable="false"
+                                     override-parameters="{'freeMode':true,'centeredSlides':true}"
+                        >
+                    <ks-swiper-slide ng-repeat="m in $root.mentors">
+                        <div class="mentorArea">
+                            <div class="avatar"
+                                 style="background-image: url({{m.get('userInfo').get('avatar').url()}});"></div>
+                            <div class="comment highLightText">{{m.comment.get('msg')}}</div>
+
+                            <div class="splitter"></div>
+                            <p class="name">{{m.get('userInfo').get('name')}}</p>
+                        </div>
+
+                    </ks-swiper-slide>
+                </ks-swiper-container>
+            </div>
+        </div>
+        <div class="commentArea">
+            <span class="highLightText">观众留言</span>
+
+            <div class="list">
+                <div class="item item-avatar appBG" href="#" ng-repeat="c in $root.comments"
+                        style="border: none">
+                    <img ng-src="{{c.get('userInfo').get('avatar').url()}}">
+                    <h2>{{c.get('userInfo').get('name')}}</h2>
+                    <p>{{c.get('msg')}}</p>
+                    <div class="splitter" style="position: absolute;width: 100%;left: 0;top: 90%; margin: 0"></div>
+                </div>
+                <!--<div class="item appBG" ng-repeat="c in $root.comments">-->
+                    <!--<>-->
+                    <!--<p>{{c.get('msg')}}</p>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

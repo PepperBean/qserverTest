@@ -1,0 +1,31 @@
+<ion-view view-title="detail">
+    <ion-content class=" appBG">
+        <div class="detailHead" style="background-color: white;width: 100%;">
+            <div class="achPoster"
+                 style="background-image: url({{$root.ach.get('poster').url()}});"></div>
+            <span>{{$root.ach.get('title')}}</span>
+            <button class="button-clear ion-chatbox commentsBtn" ng-click="comment()">  {{$root.countComments}}</button>
+            <button class="button-clear ion-thumbsup likesBtn"
+                    ng-class="{'highLight':$root.ach.alreadyLike}"
+                    ng-click="toggleLike()">  {{$root.countLikes}}
+            </button>
+            <div class="splitter"></div>
+        </div>
+        <div class="appBG"  style="height: 50px; position: relative">
+            <div class="type-tabs">
+                <div class="tabBlock" ng-click="changeIndex(0)">
+                    <button ng-class="{'highLight':activeIndex===0}" class="button-clear ion-document-text"></button></div>
+                <div class="vSplitter" style="position: absolute;left: 33%;top:5px"></div>
+                <div class="tabBlock" ng-click="changeIndex(1)">
+                    <button ng-class="{'highLight':activeIndex===1}" class="button-clear ion-chatbox"></button></div>
+                <div class="vSplitter"  style="position: absolute;left: 66%;top:5px"></div>
+                <div class="tabBlock" ng-click="changeIndex(2)">
+                    <button ng-class="{'highLight':activeIndex===2}" class="button-clear ion-thumbsup"></button></div>
+            </div>
+            <div class="guid-bar">
+                <div class="guid-bar-content" style="left:calc({{ 33*activeIndex}}% + 5%)"></div>
+            </div>
+        </div>
+        <ion-nav-view style="height:auto"></ion-nav-view>
+    </ion-content>
+</ion-view>

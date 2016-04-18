@@ -3,83 +3,98 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'app.controllers'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+    .run(function ($ionicPlatform) {
+        $ionicPlatform.ready(function () {
+            if (window.cordova && window.cordova.plugins.Keyboard) {
+                // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+                // for form inputs)
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
-
-.config(function($stateProvider, $urlRouterProvider) {
-
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $stateProvider
-
-  // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
-  })
-
-  // Each tab has its own nav history stack:
-
-  .state('tab.dash', {
-    url: '/dash',
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
-      }
-    }
-  })
-
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
+                // Don't remove this line unless you know what you are doing. It stops the viewport
+                // from snapping when text inputs are focused. Ionic handles this internally for
+                // a much nicer keyboard experience.
+                cordova.plugins.Keyboard.disableScroll(true);
+            }
+            if (window.StatusBar) {
+                StatusBar.styleDefault();
+            }
+            AV.initialize('fCIw80IiWeNtPgTjeLmyXmXa', 'rdEOJVEK8XrloWjEiaYF0yjT');
+        });
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
+    .config(function ($stateProvider, $urlRouterProvider) {
 
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  });
+        // Ionic uses AngularUI Router which uses the concept of states
+        // Learn more here: https://github.com/angular-ui/ui-router
+        // Set up the various states which the app can be in.
+        // Each state's controller can be found in controllers.js
+        $stateProvider
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+            .state('main', {
+                url: '/main/:uiid',
+                templateUrl: 'templates/main.html',
+                controller: 'mainCtrl'
+            })
+            .state('detail', {
+                //url: '/detail/:achId',  // achievement id
+                url: '/detail',  // achievement id
+                abstract: true,
+                templateUrl: 'templates/detail.html',
+                controller: 'detailCtrl'
+            })
 
-});
+            // Each tab has its own nav history stack:
+
+            .state('detail.presentation', {
+                url: '/presentation',
+                templateUrl: 'templates/presentation.html',
+                controller: 'preCtrl'
+
+            })
+            //.state('detail.570df31e2e958a0069d5f90e', {
+            //    url: '/570df31e2e958a0069d5f90e',
+            //    templateUrl: 'presentations/570df31e2e958a0069d5f90e.html',
+            //    controller: 'preCtrl'
+            //})
+            .state('detail.comments', {
+                url: '/comments',
+                templateUrl: 'templates/comments.html',
+                controller: 'commentsCtrl'
+            })
+            .state('detail.likes', {
+                url: '/likes',
+                templateUrl: 'templates/likes.html',
+                controller: 'likesCtrl'
+            })
+            .state('mentors', {
+                url: '/mentors',
+
+                templateUrl: 'templates/mentors.html',
+                controller: 'mentorsCtrl'
+            })
+            .state('management', {
+                url: '/management',
+                cache:false,
+                templateUrl: 'templates/management.html',
+                controller: 'managementCtrl'
+            })
+            .state('management.ach', {
+                url: '/ach',
+                templateUrl: 'templates/achManage.html',
+                controller: 'achManageCtrl'
+            })
+            .state('management.role', {
+                url: '/role',
+                templateUrl: 'templates/roleManage.html',
+                controller: 'roleManageCtrl'
+            });
+
+        // if none of the above states are matched, use this as the fallback
+        //$urlRouterProvider.otherwise('/management'); // for test
+        //$urlRouterProvider.otherwise('/main/560b82a960b2492773eea827');// 测试导师// user info id // for test
+        //$urlRouterProvider.otherwise('/main/5620588260b27457e844f787');// 观众// user info id // for test
+        $urlRouterProvider.otherwise('/main/5620577760b22ed7ca856fb8');// 专业评委// user info id // for test
+        //$urlRouterProvider.otherwise('/main');
+
+    });

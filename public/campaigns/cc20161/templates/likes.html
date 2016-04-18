@@ -1,0 +1,15 @@
+<ion-view view-title="likes" style="height: 300px">
+    <ion-content class="appBG" scroll="false">
+        <div class="list likes">
+            <div class="item item-avatar appBG" href="#" ng-repeat="l in $root.likes"
+                 style="border: none">
+                <img ng-src="{{l.get('liker').get('avatar').url()}}">
+
+                <h2><span class="highLightText">{{l.get('liker').get('name')}}</span> |
+                    {{l.get('liker').get('department')}}</h2>
+                <p>{{l.get('liker').get('company')}}</p>
+                <div class="splitter" style="position: absolute;width: 100%;left: 0;top: 90%; margin: 0"></div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

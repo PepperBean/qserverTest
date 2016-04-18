@@ -1,0 +1,17 @@
+<ion-view view-title="main">
+    <ion-content class="appBG">
+
+        <div class="achBlock" ng-repeat="a in achs">
+            <span class="achTitle">{{a.get('title')}}</span>
+            <span class="achCatalog">{{a.get('catalog')}} </span>
+
+            <div class="achPoster"
+                 ng-click="gotoAchDetail(a)"
+                 style="background-image: url({{a.get('poster').url()}});"></div>
+            <span class="achMembers">报名人: {{a.get('members')}}</span>
+            <div class="splitter"></div>
+            <button class="button-clear ion-thumbsup likesBtn" ng-class="{'highLight':a.alreadyLike}" ng-click="$root.toggleLike(a)"> {{a.alreadyLike?'已赞':'点赞'}}</button>
+            <button class="button-clear ion-chatbox commentsBtn" ng-click="comment(a)"> 评论</button>
+        </div>
+    </ion-content>
+</ion-view>
