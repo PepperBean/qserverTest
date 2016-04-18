@@ -5,6 +5,7 @@ var ctrlModule = angular.module('app.controllers', ['ionic', 'app.services', 'ng
 
 ctrlModule.controller('appCtrl', function ($scope, $rootScope, $state) {
 
+    AV.initialize('fCIw80IiWeNtPgTjeLmyXmXa', 'rdEOJVEK8XrloWjEiaYF0yjT');
     $scope.gotoMentors = function () {
         $state.go('mentors');
     };
