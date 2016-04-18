@@ -62,6 +62,8 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
                     return a;
                 });
             });
+        }, function (err) {
+            alert(JSON.stringify(err));
         });
         roleSvr.getAllRoles('1').then(function (ms) {
             $rootScope.mentors = ms;
