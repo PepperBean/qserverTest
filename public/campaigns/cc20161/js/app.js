@@ -94,7 +94,8 @@ angular.module('starter', ['ionic', 'app.controllers'])
         //$urlRouterProvider.otherwise('/management'); // for test
         //$urlRouterProvider.otherwise('/main/560b82a960b2492773eea827');// 测试导师// user info id // for test
         //$urlRouterProvider.otherwise('/main/5620588260b27457e844f787');// 观众// user info id // for test
-        $urlRouterProvider.otherwise('/main/5620577760b22ed7ca856fb8');// 专业评委// user info id // for test
+        //$urlRouterProvider.otherwise('/main/5620577760b22ed7ca856fb8');// 专业评委// user info id // for test
+        $urlRouterProvider.otherwise('/main/data?id=5620577760b22ed7ca856fb8');// 专业评委// user info id // for test
         //$urlRouterProvider.otherwise('/main');
 
     });
