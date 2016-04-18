@@ -28,8 +28,11 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
     , userSvr
     , interActiveSvr
     , $timeout) {
-
-    $rootScope.userInfoId = $rootScope.userInfoId || $stateParams.uiid;
+    var myID = window.location.href.split('?').pop().split('=').pop();
+    console.log(window.location.href);
+    console.log(myID);
+    $rootScope.userInfoId = $rootScope.userInfoId || myID;
+    //$rootScope.userInfoId = $rootScope.userInfoId || $stateParams.uiid;
     if (!$rootScope.user) {
         userSvr.getUserInfo($rootScope.userInfoId).then(function (user) {
             if (!!user) {
