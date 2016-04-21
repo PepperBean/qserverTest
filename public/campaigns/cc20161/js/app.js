@@ -23,8 +23,10 @@ angular.module('starter', ['ionic', 'app.controllers'])
             }
         });
     })
-    .config(function ($stateProvider, $urlRouterProvider) {
-
+    .config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
+        if(ionic.Platform.isAndroid()){
+            $ionicConfigProvider.scrolling.jsScrolling(true);
+        }
         // Ionic uses AngularUI Router which uses the concept of states
         // Learn more here: https://github.com/angular-ui/ui-router
         // Set up the various states which the app can be in.
@@ -32,7 +34,7 @@ angular.module('starter', ['ionic', 'app.controllers'])
         $stateProvider
 
             .state('main', {
-                url: '/main/:uiid',
+                url: '/main/data',
                 templateUrl: 'templates/main.html',
                 controller: 'mainCtrl'
             })
@@ -52,11 +54,11 @@ angular.module('starter', ['ionic', 'app.controllers'])
                 controller: 'preCtrl'
 
             })
-            //.state('detail.570df31e2e958a0069d5f90e', {
-            //    url: '/570df31e2e958a0069d5f90e',
-            //    templateUrl: 'presentations/570df31e2e958a0069d5f90e.html',
-            //    controller: 'preCtrl'
-            //})
+            .state('detail.57109be339b057006ba9fbc9', {
+                url: '/57109be339b057006ba9fbc9',
+                templateUrl: 'presentations/57109be339b057006ba9fbc9.html',
+                controller: 'preCtrl'
+            })
             .state('detail.comments', {
                 url: '/comments',
                 templateUrl: 'templates/comments.html',
@@ -94,7 +96,6 @@ angular.module('starter', ['ionic', 'app.controllers'])
         //$urlRouterProvider.otherwise('/management'); // for test
         //$urlRouterProvider.otherwise('/main/560b82a960b2492773eea827');// 测试导师// user info id // for test
         //$urlRouterProvider.otherwise('/main/5620588260b27457e844f787');// 观众// user info id // for test
-        //$urlRouterProvider.otherwise('/main/5620577760b22ed7ca856fb8');// 专业评委// user info id // for test
         $urlRouterProvider.otherwise('/main/data?id=5620577760b22ed7ca856fb8');// 专业评委// user info id // for test
         //$urlRouterProvider.otherwise('/main');
 

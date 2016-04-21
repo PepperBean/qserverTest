@@ -103,8 +103,10 @@
 }
 
 .type-tabs .tabBlock {
-    float: left;
-    width: 33%;
+    /*position: relative;*/
+    /*float: left;*/
+    display: inline-block;
+    width: 31%;
     line-height: 40px;
     text-align: center;
     cursor: pointer;

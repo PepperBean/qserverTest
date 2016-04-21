@@ -245,7 +245,12 @@ serviceModule.factory('interActiveSvr', function ($q, modelSvr, roleSvr) {
     var currentUserLikes = null;
     var currentUserLikesDirty = true;
 
-    function _like(ach, user) {
+    function _like(ach, user, roleType) {
+
+        if (roleType&&roleType == 2) {
+            return _judgerLike(ach, user);
+        }
+
         var q = $q.defer();
         var like = new modelSvr.likes();
         like.set('liker', user);
@@ -258,6 +263,30 @@ serviceModule.factory('interActiveSvr', function ($q, modelSvr, roleSvr) {
             q.reject(err);
         });
 
+        return q.promise;
+    }
+
+    function _judgerLike(ach, judger) {
+        var q = $q.defer();
+        var query = new AV.Query(modelSvr.likes);
+        query.equalTo('liker', judger);
+        query.count().then(function (n) {
+            if (n >= 3) {
+                q.reject('对不起，专业评委只能点赞3次');
+            }
+            else {
+                var like = new modelSvr.likes();
+                like.set('liker', judger);
+                //like.fetchWhenSave(true);
+                like.set('ach', ach);
+                like.save().then(function () {
+                    currentUserLikesDirty = true;
+                    q.resolve();
+                }, function (err) {
+                    q.reject(err);
+                });
+            }
+        });
         return q.promise;
     }
 
@@ -440,10 +469,108 @@ serviceModule.factory('interActiveSvr', function ($q, modelSvr, roleSvr) {
         addComment: _addComment,
         getAllmComments: _getAllmCommnets,
         getAllComments: _getAllCommnets,
-        getAllLikes:_getAllLikes,
+        getAllLikes: _getAllLikes,
         countLikes: _countLikes,
         countComments: _countComments
 
     }
 
+});
+
+//
+//serviceModule.directive('detailScrolling', function ($document, $rootScope, $timeout) {
+//    return {
+//        restrict: 'A',
+//        link: function (scope, element, attrs) {
+//            var startPos = scope.$eval(attrs.detailScrolling) || 0;
+//            var currentPos = 0;
+//            var dir = 0;
+//            element.bind('scroll', function (e) {
+//                if (e.detail.scrollTop >= currentPos) {
+//                    if (dir < 1) {
+//                        startPos = e.detail.scrollTop;
+//                        $rootScope.$broadcast('endScrollingUp', startPos);
+//                        $rootScope.$broadcast('startScrollingDown', startPos);
+//                        dir = 1;
+//                    }
+//                    currentPos = e.detail.scrollTop;
+//                    if (currentPos == 0) {
+//                        startPos = 0;
+//                    }
+//                    var offset = startPos - currentPos;
+//                    $rootScope.$broadcast('scrollingDown', offset);
+//                } else {
+//                    if (dir > -1) {
+//                        startPos = e.detail.scrollTop;
+//                        $rootScope.$broadcast('endScrollingDown', startPos);
+//                        $rootScope.$broadcast('startScrollingUp', startPos);
+//                        dir = -1;
+//                    }
+//                    currentPos = e.detail.scrollTop;
+//                    var offset = startPos - currentPos;
+//                    $rootScope.$broadcast('scrollingUp', offset);
+//                }
+//            });
+//        }
+//    }
+//});
+
+
+//angular.module('ionic.ion.headerShrink', [])
+
+serviceModule.directive('headerShrink', function ($document) {
+    var fadeAmt;
+
+    var shrink = function (header, content, amt, max) {
+        amt = Math.min(max, amt);
+        fadeAmt = 1 - amt / max;
+        ionic.requestAnimationFrame(function () {
+            header.style[ionic.CSS.TRANSFORM] = 'translate3d(0, -' + amt + 'px, 0)';
+            for (var i = 0, j = header.children.length; i < j; i++) {
+                header.children[i].style.opacity = fadeAmt;
+            }
+        });
+    };
+
+    return {
+        restrict: 'A',
+        link: function ($scope, $element, $attr) {
+            var starty = $scope.$eval($attr.headerShrink) || 0;
+            var shrinkAmt;
+
+            var amt;
+
+            var y = 0;
+            var prevY = 0;
+            var scrollDelay = .8;
+
+            var fadeAmt;
+
+            var header = $document[0].body.querySelector('.detailHead');
+            //var header = $document[0].body.querySelector('.bar-header');
+            var headerHeight = header.offsetHeight;
+
+            function onScroll(e) {
+                var scrollTop = e.detail.scrollTop;
+
+                if (scrollTop >= 0) {
+                    y = Math.min(headerHeight / scrollDelay, Math.max(0, y + scrollTop - prevY));
+                } else {
+                    y = 0;
+                }
+                console.log(scrollTop + "#" + y);
+                ionic.requestAnimationFrame(function () {
+                    fadeAmt = 1 - (y / headerHeight);
+                    header.style[ionic.CSS.TRANSFORM] = 'translate3d(0, ' + -y + 'px, 0)';
+                    for (var i = 0, j = header.children.length; i < j; i++) {
+                        header.children[i].style.opacity = fadeAmt;
+                    }
+                });
+
+                prevY = scrollTop;
+            }
+
+            $element.bind('scroll', onScroll);
+        }
+    }
 });

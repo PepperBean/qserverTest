@@ -22,16 +22,27 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
     , $state
     , $stateParams
     , $q
+    , $window
+    , $ionicPopup
     , achSvr
     , roleSvr
     , userSvr
     , interActiveSvr
     , $timeout) {
+
+
+    //   yesir 2016/4/12 10:22:35
+    //   AV.initialize('q8hYvyi3O9PWoLc8HrgD3oh3', 'YWyuQDG8Oy3bgvEKxKgnXwJy');
+
+    //var url = window.location.search;
+    //var match = url.match(/\?id=([0-9a-z]{24})/);
+    // var url = '1.2.3/data?id=5603a807ddb255edbff26fab';
+    // var match = url.match(/data\?id=([0-9a-z]{24})/);
+    //var myID = match[1];
     var myID = window.location.href.split('?').pop().split('=').pop();
     console.log(window.location.href);
     console.log(myID);
     $rootScope.userInfoId = $rootScope.userInfoId || myID;
-    //$rootScope.userInfoId = $rootScope.userInfoId || $stateParams.uiid;
     if (!$rootScope.user) {
         userSvr.getUserInfo($rootScope.userInfoId).then(function (user) {
             if (!!user) {
@@ -44,6 +55,7 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
             alert('用户错误');
         });
     }
+
 
     if (!$rootScope.roleType) {
         roleSvr.getRoleType($rootScope.userInfoId).then(function (rt) {
@@ -62,8 +74,6 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
                     return a;
                 });
             });
-        }, function (err) {
-            alert(JSON.stringify(err));
         });
         roleSvr.getAllRoles('1').then(function (ms) {
             $rootScope.mentors = ms;
@@ -84,11 +94,15 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
             });
         }
         else {
-            interActiveSvr.like(ach, $rootScope.user).then(function () {
+            interActiveSvr.like(ach, $rootScope.user, $rootScope.roleType).then(function () {
                 $timeout(function () {
                     ach.alreadyLike = true;
                 });
                 q.resolve();
+            }, function (err) {
+                $ionicPopup.alert({
+                    title:err
+                });
             });
         }
         return q.promise;
@@ -103,7 +117,11 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
         $rootScope.ach = ach;
         //$state.go('detail.' + $rootScope.ach.id);
         $state.go('detail.presentation');
-    }
+    };
+    var height = $window.innerHeight;
+    $rootScope.dynHeight = {
+        height: height + 'px'
+    };
 
 });
 
@@ -230,25 +248,43 @@ ctrlModule.controller('detailCtrl', function ($scope, $rootScope
             $scope.refreshLikes();
         });
     };
+    var count = 0;
 
+
+    //$scope.$on('scrollingDown', function (p,v) {
+    //    console.log('down' + v);
+    //
+    //});
+    //$scope.$on('scrollingUp', function (p,v) {
+    //    console.log('up' + v);
+    //});
+
+    //var tId;
+    //
+    //function _throttle(method, para) {
+    //    $timeout.cancel(tId);
+    //    tId = $timeout(function () {
+    //        method(para);
+    //    }, 800);
+    //};
 
 });
 
-ctrlModule.controller('preCtrl', function ($scope, $rootScope) {
+ctrlModule.controller('preCtrl', function ($scope, $rootScope, $state) {
     $scope.$on('$ionicView.beforeEnter', function () {
         $rootScope.activeIndex = 0;
+        $state.go('detail.' + $rootScope.ach.id);
     });
     //$scope.$on('$ionicView.afterEnter', function () {
     //    $scope.preUrl = 'presentations/' + $rootScope.ach.id + '.html';
     //})
 });
 
-ctrlModule.controller('commentsCtrl', function ($scope, $rootScope, interActiveSvr, $timeout) {
+ctrlModule.controller('commentsCtrl', function ($scope, $rootScope) {
     $scope.$on('$ionicView.beforeEnter', function () {
         $rootScope.activeIndex = 1;
-        $scope.dynHeight = {
-            height: '500px'
-        };
+
+
     });
 
     $scope.$on('$ionicView.enter', function () {

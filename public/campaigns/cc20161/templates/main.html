@@ -1,4 +1,13 @@
 <ion-view view-title="main">
+    <ion-header-bar class="bar-dark">
+        <button class="button-clear" ng-class="{'hidden':$root.hideGoHome}"
+                ng-click="goHome()">
+            <i class="ion-arrow-left-c"></i>
+        </button>
+        <h1 class="title">创新大赛</h1>
+        <button class="button-clear ion-ios-people stable headbarBtn" ng-click="gotoMentors()"></button>
+        <button class="button-clear ion-document-text stable headbarBtn"></button>
+    </ion-header-bar>
     <ion-content class="appBG">
 
         <div class="achBlock" ng-repeat="a in achs">
