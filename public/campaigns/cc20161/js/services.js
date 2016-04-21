@@ -553,7 +553,7 @@ serviceModule.directive('headerShrink', function ($document) {
             function onScroll(e) {
                 var scrollTop = e.detail.scrollTop;
 
-                if (scrollTop >= 0) {
+                if (scrollTop >= 1) {
                     y = Math.min(headerHeight / scrollDelay, Math.max(0, y + scrollTop - prevY));
                 } else {
                     y = 0;
