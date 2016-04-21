@@ -6,7 +6,7 @@
 
 .headbarBtn {
     position: relative;
-    left: calc(100% - 80px);
+    left: calc(100% - 110px);
     margin-right: 10px;
     /*float: right !important;*/
 }
