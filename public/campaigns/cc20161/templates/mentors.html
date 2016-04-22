@@ -1,5 +1,21 @@
 <ion-view view-title="mentors">
     <ion-content class="padding">
-mentors
+        <div>
+            <div class="headpic">
+                <div class="headpicleft" ng-click="GetMentorInfo(0)"><img src="./img/pic1.png" class="mentorsImg" /></div>
+                <div class="headpicmid"  ng-click="GetMentorInfo(1)"><img src="./img/pic1.png" class="mentorsImg" /></div>
+                <div class="headpicmid"  ng-click="GetMentorInfo(2)"><img src="./img/pic1.png" class="mentorsImg" /></div>
+                <div class="headpicmid"  ng-click="GetMentorInfo(3)"><img src="./img/pic1.png" class="mentorsImg" /></div>
+                <div class="headpicmid"  ng-click="GetMentorInfo(4)"><img src="./img/pic1.png" class="mentorsImg" /></div>
+            </div>
+            <div class="list">
+                <div class="item item-avatar appBG" style="border: 0">
+                    <img ng-src="{{avatar.url()}}">
+                    <h2><span class="highLightText">{{name}}</span> | {{department}}</h2>
+                    <p>{{company}}</p>
+                </div>
+            </div>
+        </div>
     </ion-content>
 </ion-view>
+
