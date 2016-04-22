@@ -302,9 +302,67 @@ ctrlModule.controller('likesCtrl', function ($scope, $rootScope) {
     })
 });
 
-ctrlModule.controller('mentorsCtrl', function ($scope) {
+ctrlModule.controller('mentorsCtrl', function ($scope,userSvr) {
+    // 导师界面默认信息
+    // 详情信息待更新。
+    userSvr.getUserInfo("563723d300b05c9d2b6fc50e").then(function (user) {
+        if (!!user) {
+            $scope.avatar = user.get("avatar");
+            $scope.name = user.get("name");
+            $scope.department = user.get("department");
+            $scope.company = user.get("company");
+            $scope.lastIndex=0;
+        }
+        else {
+            alert('导师信息错误');
+        }
+    }, function (err) {
+        alert('导师信息错误');
+    });
+    // 点击重新筛选信息
+    // 详情待更新
+    $scope.GetMentorInfo = function (Index) {
+        if ($scope.lastIndex != Index){
+            switch (Index) {
+                case 0:
+                    $scope.userID = "563723d300b05c9d2b6fc50e";
+                    break;
+                case 1:
+                    $scope.userID = "561f412f60b227b7f4bf460c";
+                    break;
+                case 2:
+                    $scope.userID = "560a224f00b0e93fd8d9fc22";
+                    break;
+                case 3:
+                    $scope.userID = "5604de3a60b20ed8f64ff54a";
+                    break;
+                case 4:
+                    $scope.userID = "5637250e60b204d5083c6b57";
+                    break;
+                default:
+                    return;
+            }
+            userSvr.getUserInfo($scope.userID).then(function (user) {
+                if (!!user) {
+                    $scope.$apply(function(){
+                        $scope.avatar = user.get("avatar");
+                        $scope.name = user.get("name");
+                        $scope.department = user.get("department");
+                        $scope.company = user.get("company");
+                        $scope.lastIndex=Index;
+                    })
 
+                }
+                else {
+                    alert('导师信息错误');
+                }
+            }, function (err) {
+                alert('导师信息错误');
+            });
+        }
+    }
 });
+
 
 ctrlModule.controller('managementCtrl', function ($scope, userSvr, $state) {
     $state.go('management.ach');
