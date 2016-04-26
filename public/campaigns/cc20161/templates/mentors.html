@@ -2,11 +2,11 @@
     <ion-content class="padding">
         <div>
             <div class="headpic">
-                <div class="headpicleft" ng-click="GetMentorInfo(0)"><img src="./img/pic1.png" class="mentorsImg" /></div>
-                <div class="headpicmid"  ng-click="GetMentorInfo(1)"><img src="./img/pic1.png" class="mentorsImg" /></div>
-                <div class="headpicmid"  ng-click="GetMentorInfo(2)"><img src="./img/pic1.png" class="mentorsImg" /></div>
-                <div class="headpicmid"  ng-click="GetMentorInfo(3)"><img src="./img/pic1.png" class="mentorsImg" /></div>
-                <div class="headpicmid"  ng-click="GetMentorInfo(4)"><img src="./img/pic1.png" class="mentorsImg" /></div>
+                <div class="headpicleft" ><img id="pic00" src="./img/pic1.png"  ng-class="{true:'mentorsImgHovr',false:'mentorsImg'}[picActive00]" ng-click="GetMentorInfo(0,'pic00')"/></div>
+                <div class="headpicmid"  ><img id="pic01" src="./img/pic1.png"  ng-class="{true:'mentorsImgHovr',false:'mentorsImg'}[picActive01]" ng-click="GetMentorInfo(1,'pic01')"/></div>
+                <div class="headpicmid"  ><img id="pic02" src="./img/pic1.png"  ng-class="{true:'mentorsImgHovr',false:'mentorsImg'}[picActive02]" ng-click="GetMentorInfo(2,'pic02')"/></div>
+                <div class="headpicmid"  ><img id="pic03" src="./img/pic1.png"  ng-class="{true:'mentorsImgHovr',false:'mentorsImg'}[picActive03]" ng-click="GetMentorInfo(3,'pic03')"/></div>
+                <div class="headpicmid"  ><img id="pic04" src="./img/pic1.png"  ng-class="{true:'mentorsImgHovr',false:'mentorsImg'}[picActive04]" ng-click="GetMentorInfo(4,'pic04')"/></div>
             </div>
             <div class="list">
                 <div class="item item-avatar appBG" style="border: 0">
