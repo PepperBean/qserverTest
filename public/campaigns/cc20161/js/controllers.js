@@ -312,6 +312,11 @@ ctrlModule.controller('mentorsCtrl', function ($scope,userSvr) {
             $scope.department = user.get("department");
             $scope.company = user.get("company");
             $scope.lastIndex=0;
+            $scope.picActive00=true;
+            $scope.picActive01=false;
+            $scope.picActive02=false;
+            $scope.picActive03=false;
+            $scope.picActive04=false;
         }
         else {
             alert('导师信息错误');
@@ -321,23 +326,53 @@ ctrlModule.controller('mentorsCtrl', function ($scope,userSvr) {
     });
     // 点击重新筛选信息
     // 详情待更新
-    $scope.GetMentorInfo = function (Index) {
+    $scope.GetMentorInfo = function (Index,imgID) {
         if ($scope.lastIndex != Index){
             switch (Index) {
                 case 0:
                     $scope.userID = "563723d300b05c9d2b6fc50e";
+                    $scope.imgID="pic00";
+                    $scope.picActive00=true;
+                    $scope.picActive01=false;
+                    $scope.picActive02=false;
+                    $scope.picActive03=false;
+                    $scope.picActive04=false;
                     break;
                 case 1:
                     $scope.userID = "561f412f60b227b7f4bf460c";
+                    $scope.imgID="pic01";
+                    $scope.picActive00=false;
+                    $scope.picActive01=true;
+                    $scope.picActive02=false;
+                    $scope.picActive03=false;
+                    $scope.picActive04=false;
                     break;
                 case 2:
                     $scope.userID = "560a224f00b0e93fd8d9fc22";
+                    $scope.imgID="pic02";
+                    $scope.picActive00=false;
+                    $scope.picActive01=false;
+                    $scope.picActive02=true;
+                    $scope.picActive03=false;
+                    $scope.picActive04=false;
                     break;
                 case 3:
                     $scope.userID = "5604de3a60b20ed8f64ff54a";
+                    $scope.imgID="pic03";
+                    $scope.picActive00=false;
+                    $scope.picActive01=false;
+                    $scope.picActive02=false;
+                    $scope.picActive03=true;
+                    $scope.picActive04=false;
                     break;
                 case 4:
                     $scope.userID = "5637250e60b204d5083c6b57";
+                    $scope.imgID="pic04";
+                    $scope.picActive00=false;
+                    $scope.picActive01=false;
+                    $scope.picActive02=false;
+                    $scope.picActive03=false;
+                    $scope.picActive04=true;
                     break;
                 default:
                     return;
@@ -350,8 +385,8 @@ ctrlModule.controller('mentorsCtrl', function ($scope,userSvr) {
                         $scope.department = user.get("department");
                         $scope.company = user.get("company");
                         $scope.lastIndex=Index;
-                    })
 
+                    });
                 }
                 else {
                     alert('导师信息错误');
