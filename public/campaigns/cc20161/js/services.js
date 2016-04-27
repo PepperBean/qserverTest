@@ -156,6 +156,7 @@ serviceModule.factory('achSvr', function ($q, modelSvr) {
     function _saveAchievements(info) {
         var q = $q.defer();
         var ach = new modelSvr.ach();
+        ach.set('index', info.index);
         ach.set('title', info.title);
         ach.set('members', info.members);
         ach.set('catalog', info.catalog);
@@ -558,7 +559,7 @@ serviceModule.directive('headerShrink', function ($document) {
                 } else {
                     y = 0;
                 }
-                console.log(scrollTop + "#" + y);
+                // console.log(scrollTop + "#" + y);
                 ionic.requestAnimationFrame(function () {
                     fadeAmt = 1 - (y / headerHeight);
                     header.style[ionic.CSS.TRANSFORM] = 'translate3d(0, ' + -y + 'px, 0)';

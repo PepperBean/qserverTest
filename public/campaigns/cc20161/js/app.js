@@ -54,11 +54,78 @@ angular.module('starter', ['ionic', 'app.controllers'])
                 controller: 'preCtrl'
 
             })
-            .state('detail.57109be339b057006ba9fbc9', {
-                url: '/57109be339b057006ba9fbc9',
-                templateUrl: 'presentations/57109be339b057006ba9fbc9.html',
+            // pre start+++++++++++++++++++++++++
+            .state('detail.p1', {
+                url: '/p1',
+                templateUrl: 'presentations/p1.html',
                 controller: 'preCtrl'
             })
+            .state('detail.p2', {
+                url: '/p2',
+                templateUrl: 'presentations/p2.html',
+                controller: 'preCtrl'
+            })
+            .state('detail.p3', {
+                url: '/p3',
+                templateUrl: 'presentations/p3.html',
+                controller: 'preCtrl'
+            })
+            .state('detail.p4', {
+                url: '/p4',
+                templateUrl: 'presentations/p4.html',
+                controller: 'preCtrl'
+            })
+            .state('detail.p5', {
+                url: '/p5',
+                templateUrl: 'presentations/p5.html',
+                controller: 'preCtrl'
+            })
+            .state('detail.p6', {
+                url: '/p6',
+                templateUrl: 'presentations/p6.html',
+                controller: 'preCtrl'
+            })
+            .state('detail.p7', {
+                url: '/p7',
+                templateUrl: 'presentations/p7.html',
+                controller: 'preCtrl'
+            })
+            .state('detail.p8', {
+                url: '/p8',
+                templateUrl: 'presentations/p8.html',
+                controller: 'preCtrl'
+            })
+            .state('detail.p9', {
+                url: '/p9',
+                templateUrl: 'presentations/p9.html',
+                controller: 'preCtrl'
+            })
+            .state('detail.p10', {
+                url: '/p10',
+                templateUrl: 'presentations/p10.html',
+                controller: 'preCtrl'
+            })
+            .state('detail.p11', {
+                url: '/p11',
+                templateUrl: 'presentations/p11.html',
+                controller: 'preCtrl'
+            })
+            .state('detail.p12', {
+                url: '/p12',
+                templateUrl: 'presentations/p12.html',
+                controller: 'preCtrl'
+            })
+            .state('detail.p13', {
+                url: '/p13',
+                templateUrl: 'presentations/p13.html',
+                controller: 'preCtrl'
+            })
+            .state('detail.p14', {
+                url: '/p14',
+                templateUrl: 'presentations/p14.html',
+                controller: 'preCtrl'
+            })
+            // pre end+++++++++++++++++++++++++
             .state('detail.comments', {
                 url: '/comments',
                 templateUrl: 'templates/comments.html',
@@ -94,9 +161,9 @@ angular.module('starter', ['ionic', 'app.controllers'])
 
         // if none of the above states are matched, use this as the fallback
         //$urlRouterProvider.otherwise('/management'); // for test
-        //$urlRouterProvider.otherwise('/main/560b82a960b2492773eea827');// ²âÊÔµ¼Ê¦// user info id // for test
-        //$urlRouterProvider.otherwise('/main/5620588260b27457e844f787');// ¹ÛÖÚ// user info id // for test
-        $urlRouterProvider.otherwise('/main/data?id=5620577760b22ed7ca856fb8');// ×¨ÒµÆÀÎ¯// user info id // for test
+        //$urlRouterProvider.otherwise('/main/560b82a960b2492773eea827');// ï¿½ï¿½ï¿½Ôµï¿½Ê¦// user info id // for test
+        //$urlRouterProvider.otherwise('/main/5620588260b27457e844f787');// ï¿½ï¿½ï¿½ï¿½// user info id // for test
+        $urlRouterProvider.otherwise('/main/data?id=5620577760b22ed7ca856fb8');// ×¨Òµï¿½ï¿½Î¯// user info id // for test
         //$urlRouterProvider.otherwise('/main');
 
     });
