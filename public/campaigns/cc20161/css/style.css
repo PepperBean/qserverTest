@@ -230,3 +230,8 @@
 .mentorsImgHovr {
     opacity: 1 !important;
 }
+
+.fitImg img{
+    width: 100% !important;
+    height: auto !important;
+}

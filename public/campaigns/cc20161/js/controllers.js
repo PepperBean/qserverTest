@@ -324,7 +324,7 @@ ctrlModule.controller('mentorsCtrl', function ($scope, userSvr) {
         ,
         {
             imgPath: "./img/mentor5.jpg",
-            mentorId: "56270074ddb2084ab0eebda6"  // 胡亚秋
+            mentorId: "56306c1800b0d1dbddef4d26"  // 胡亚秋
         }
     ];
     $scope.headPW = {
