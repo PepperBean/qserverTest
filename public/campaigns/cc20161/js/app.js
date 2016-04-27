@@ -6,7 +6,10 @@
 angular.module('starter', ['ionic', 'app.controllers'])
 
     .run(function ($ionicPlatform) {
-        AV.initialize('fCIw80IiWeNtPgTjeLmyXmXa', 'rdEOJVEK8XrloWjEiaYF0yjT');
+        // qsshow *************
+        AV.initialize('q8hYvyi3O9PWoLc8HrgD3oh3', 'YWyuQDG8Oy3bgvEKxKgnXwJy');
+        // dev **************
+        // AV.initialize('fCIw80IiWeNtPgTjeLmyXmXa', 'rdEOJVEK8XrloWjEiaYF0yjT');
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

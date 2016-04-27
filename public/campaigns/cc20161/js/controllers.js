@@ -225,7 +225,7 @@ ctrlModule.controller('detailCtrl', function ($scope, $rootScope
     };
     $scope.refreshmCommnets = function () {
         interActiveSvr.getAllmComments($rootScope.ach).then(function (mcs) {
-            _.every($rootScope.mentors, function (m) {
+            _.forEach($rootScope.mentors, function (m) {
                 var tm = _.find(mcs, function (cm) {
                     return cm.get('userInfo').id === m.get('userInfo').id;
                 });
@@ -306,25 +306,25 @@ ctrlModule.controller('mentorsCtrl', function ($scope, userSvr) {
 
     $scope.mentorsInfo = [
         {
-            imgPath: "./img/mentor1.png",
-            mentorId: "563723d300b05c9d2b6fc50e"
+            imgPath: "./img/mentor1.jpg",
+            mentorId: "561f64c500b07c4da6be1503"  // 许磊
         },
         {
-            imgPath: "./img/mentor2.png",
-            mentorId: "561f412f60b227b7f4bf460c"
+            imgPath: "./img/mentor2.jpg",
+            mentorId: "56270074ddb2084ab0eebda6"  // 张风柱
         },
         {
-            imgPath: "./img/mentor3.png",
-            mentorId: "560a224f00b0e93fd8d9fc22"
+            imgPath: "./img/mentor3.jpg",
+            mentorId: "5631dc1e60b25b79325e2885"  // 刘中胜
         },
         {
-            imgPath: "./img/mentor4.png",
-            mentorId: "5604de3a60b20ed8f64ff54a"
+            imgPath: "./img/mentor4.jpg",
+            mentorId: "563723a060b25b7932c26152" //  马红娟
         }
         ,
         {
-            imgPath: "./img/mentor5.png",
-            mentorId: "5637250e60b204d5083c6b57"
+            imgPath: "./img/mentor5.jpg",
+            mentorId: "56270074ddb2084ab0eebda6"  // 胡亚秋
         }
     ];
     $scope.headPW = {
@@ -332,12 +332,12 @@ ctrlModule.controller('mentorsCtrl', function ($scope, userSvr) {
     };
     // 导师界面默认信息
     // 详情信息待更新。
-    userSvr.getUserInfo($scope.mentorsInfo[0].mentorId)
+    userSvr.getUserInfo($scope.mentorsInfo[2].mentorId)
         .then(function (user) {
             if (!!user) {
                 $scope.selectedMentor = user;
-                $scope.lastIndex = 0;
-                $scope.selectedM = 0;
+                $scope.lastIndex = 2;
+                $scope.selectedM = 2;
             }
             else {
                 alert('导师信息错误');
