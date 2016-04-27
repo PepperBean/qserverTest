@@ -115,8 +115,8 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
 
     $scope.gotoAchDetail = function (ach) {
         $rootScope.ach = ach;
-        $state.go('detail.p' + $rootScope.ach.get('index'));
-        // $state.go('detail.presentation');
+        // $state.go('detail.p' + $rootScope.ach.get('index'));
+        $state.go('detail.presentation');
     };
     var height = $window.innerHeight;
     $rootScope.dynHeight = {
@@ -270,10 +270,15 @@ ctrlModule.controller('detailCtrl', function ($scope, $rootScope
 
 });
 
-ctrlModule.controller('preCtrl', function ($scope, $rootScope, $state) {
-    $scope.$on('$ionicView.beforeEnter', function () {
+ctrlModule.controller('preCtrl', function ($scope, $rootScope, $state, $timeout) {
+    $scope.$on('$ionicView.afterEnter', function () {
         $rootScope.activeIndex = 0;
-        $state.go('detail.p' + $rootScope.ach.get('index'));
+        if ($state.current.name === 'detail.presentation') {
+            $timeout(function () {
+                $state.go('detail.p' + $rootScope.ach.get('index'));
+
+            }, 200);
+        }
     });
     //$scope.$on('$ionicView.afterEnter', function () {
     //    $scope.preUrl = 'presentations/' + $rootScope.ach.id + '.html';
