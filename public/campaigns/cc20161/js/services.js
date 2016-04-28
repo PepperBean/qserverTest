@@ -478,47 +478,6 @@ serviceModule.factory('interActiveSvr', function ($q, modelSvr, roleSvr) {
 
 });
 
-//
-//serviceModule.directive('detailScrolling', function ($document, $rootScope, $timeout) {
-//    return {
-//        restrict: 'A',
-//        link: function (scope, element, attrs) {
-//            var startPos = scope.$eval(attrs.detailScrolling) || 0;
-//            var currentPos = 0;
-//            var dir = 0;
-//            element.bind('scroll', function (e) {
-//                if (e.detail.scrollTop >= currentPos) {
-//                    if (dir < 1) {
-//                        startPos = e.detail.scrollTop;
-//                        $rootScope.$broadcast('endScrollingUp', startPos);
-//                        $rootScope.$broadcast('startScrollingDown', startPos);
-//                        dir = 1;
-//                    }
-//                    currentPos = e.detail.scrollTop;
-//                    if (currentPos == 0) {
-//                        startPos = 0;
-//                    }
-//                    var offset = startPos - currentPos;
-//                    $rootScope.$broadcast('scrollingDown', offset);
-//                } else {
-//                    if (dir > -1) {
-//                        startPos = e.detail.scrollTop;
-//                        $rootScope.$broadcast('endScrollingDown', startPos);
-//                        $rootScope.$broadcast('startScrollingUp', startPos);
-//                        dir = -1;
-//                    }
-//                    currentPos = e.detail.scrollTop;
-//                    var offset = startPos - currentPos;
-//                    $rootScope.$broadcast('scrollingUp', offset);
-//                }
-//            });
-//        }
-//    }
-//});
-
-
-//angular.module('ionic.ion.headerShrink', [])
-
 serviceModule.directive('headerShrink', function ($document) {
     var fadeAmt;
 
@@ -550,6 +509,13 @@ serviceModule.directive('headerShrink', function ($document) {
             var header = $document[0].body.querySelector('.detailHead');
             //var header = $document[0].body.querySelector('.bar-header');
             var headerHeight = header.offsetHeight;
+
+            $scope.$parent.$on('$ionicView.leave', function () {
+                header.style[ionic.CSS.TRANSFORM] = 'translate3d(0, 0px, 0)';
+                for (var i = 0, j = header.children.length; i < j; i++) {
+                    header.children[i].style.opacity = 1;
+                }
+            });
 
             function onScroll(e) {
                 var scrollTop = e.detail.scrollTop;

@@ -248,26 +248,6 @@ ctrlModule.controller('detailCtrl', function ($scope, $rootScope
             $scope.refreshLikes();
         });
     };
-    var count = 0;
-
-
-    //$scope.$on('scrollingDown', function (p,v) {
-    //    console.log('down' + v);
-    //
-    //});
-    //$scope.$on('scrollingUp', function (p,v) {
-    //    console.log('up' + v);
-    //});
-
-    //var tId;
-    //
-    //function _throttle(method, para) {
-    //    $timeout.cancel(tId);
-    //    tId = $timeout(function () {
-    //        method(para);
-    //    }, 800);
-    //};
-
 });
 
 ctrlModule.controller('preCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading,$ionicHistory) {
@@ -296,8 +276,6 @@ ctrlModule.controller('preCtrl', function ($scope, $rootScope, $state, $timeout,
 ctrlModule.controller('commentsCtrl', function ($scope, $rootScope) {
     $scope.$on('$ionicView.beforeEnter', function () {
         $rootScope.activeIndex = 1;
-
-
     });
 
     $scope.$on('$ionicView.enter', function () {
@@ -309,7 +287,7 @@ ctrlModule.controller('commentsCtrl', function ($scope, $rootScope) {
 ctrlModule.controller('likesCtrl', function ($scope, $rootScope) {
     $scope.$on('$ionicView.beforeEnter', function () {
         $rootScope.activeIndex = 2;
-    })
+    });
     $scope.$on('$ionicView.enter', function () {
         $scope.$parent.refreshLikes();
     })
