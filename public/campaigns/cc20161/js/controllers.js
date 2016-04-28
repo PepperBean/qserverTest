@@ -24,6 +24,7 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
     , $q
     , $window
     , $ionicPopup
+    , $ionicHistory
     , achSvr
     , roleSvr
     , userSvr
@@ -64,6 +65,7 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
     }
 
     $scope.$on('$ionicView.enter', function () {
+        $ionicHistory.clearHistory();
         achSvr.getAllAchs().then(function (achs) {
             $scope.achs = achs;
             $timeout(function () {
@@ -250,15 +252,16 @@ ctrlModule.controller('detailCtrl', function ($scope, $rootScope
     };
 });
 
-ctrlModule.controller('preCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading,$ionicHistory) {
+ctrlModule.controller('preCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading, $ionicHistory) {
     $scope.$on('$ionicView.afterEnter', function () {
         $rootScope.activeIndex = 0;
         if ($state.current.name === 'detail.presentation') {
-
+            $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true,
+                historyRoot: false
+            });
             $timeout(function () {
-                $ionicHistory.nextViewOptions({
-                    disableAnimate: true
-                });
                 $state.go('detail.p' + $rootScope.ach.get('index'));
                 $ionicLoading.show({
                     template: '正在加载...'
