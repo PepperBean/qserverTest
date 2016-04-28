@@ -163,8 +163,8 @@ ctrlModule.controller('detailCtrl', function ($scope, $rootScope
         $rootScope.activeIndex = index;
         switch (index) {
             case 0 :
-                $state.go('detail.p' + $rootScope.ach.get('index'));
-                // $state.go('detail.presentation');
+                // $state.go('detail.p' + $rootScope.ach.get('index'));
+                $state.go('detail.presentation');
                 break;
             case 1:
                 $state.go('detail.comments');
@@ -270,19 +270,24 @@ ctrlModule.controller('detailCtrl', function ($scope, $rootScope
 
 });
 
-ctrlModule.controller('preCtrl', function ($scope, $rootScope, $state, $timeout) {
+ctrlModule.controller('preCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading) {
     $scope.$on('$ionicView.afterEnter', function () {
         $rootScope.activeIndex = 0;
         if ($state.current.name === 'detail.presentation') {
+
             $timeout(function () {
                 $state.go('detail.p' + $rootScope.ach.get('index'));
-
+                $ionicLoading.show({
+                    template: '正在加载...'
+                });
             }, 200);
         }
     });
-    //$scope.$on('$ionicView.afterEnter', function () {
-    //    $scope.preUrl = 'presentations/' + $rootScope.ach.id + '.html';
-    //})
+
+
+    $scope.$on('$ionicView.beforeLeave', function () {
+        $ionicLoading.hide();
+    })
 });
 
 ctrlModule.controller('commentsCtrl', function ($scope, $rootScope) {

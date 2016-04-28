@@ -30,6 +30,7 @@ angular.module('starter', ['ionic', 'app.controllers'])
         if(ionic.Platform.isAndroid()){
             $ionicConfigProvider.scrolling.jsScrolling(true);
         }
+        $ionicConfigProvider.templates.maxPrefetch(0);
         // Ionic uses AngularUI Router which uses the concept of states
         // Learn more here: https://github.com/angular-ui/ui-router
         // Set up the various states which the app can be in.
