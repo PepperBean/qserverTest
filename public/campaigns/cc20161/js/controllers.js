@@ -270,12 +270,15 @@ ctrlModule.controller('detailCtrl', function ($scope, $rootScope
 
 });
 
-ctrlModule.controller('preCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading) {
+ctrlModule.controller('preCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading,$ionicHistory) {
     $scope.$on('$ionicView.afterEnter', function () {
         $rootScope.activeIndex = 0;
         if ($state.current.name === 'detail.presentation') {
 
             $timeout(function () {
+                $ionicHistory.nextViewOptions({
+                    disableAnimate: true
+                });
                 $state.go('detail.p' + $rootScope.ach.get('index'));
                 $ionicLoading.show({
                     template: '正在加载...'
