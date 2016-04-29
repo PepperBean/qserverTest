@@ -166,8 +166,8 @@ angular.module('starter', ['ionic', 'app.controllers'])
         // if none of the above states are matched, use this as the fallback
         //$urlRouterProvider.otherwise('/management'); // for test
         //$urlRouterProvider.otherwise('/main/560b82a960b2492773eea827');// ���Ե�ʦ// user info id // for test
-        //$urlRouterProvider.otherwise('/main/5620588260b27457e844f787');// ����// user info id // for test
-        $urlRouterProvider.otherwise('/main/data?id=5620577760b22ed7ca856fb8');// רҵ��ί// user info id // for test
+        // $urlRouterProvider.otherwise('/main/5620588260b27457e844f787');// ����// user info id // for test
+        $urlRouterProvider.otherwise('/main/data?id=5620588260b27457e844f787');// רҵ��ί// user info id // for test
         //$urlRouterProvider.otherwise('/main');
 
     });
