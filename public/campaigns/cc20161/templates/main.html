@@ -12,7 +12,7 @@
 
         <div class="achBlock" ng-repeat="a in achs">
             <span class="achTitle">{{a.get('title')}}</span>
-            <span class="achCatalog">{{a.get('catalog')}} </span>
+            <span class="achCatalog" ng-class="{'manage':a.get('catalog')==='管理创新','tech':a.get('catalog')==='技术创新'}">{{a.get('catalog')}} </span>
 
             <div class="achPoster"
                  ng-click="gotoAchDetail(a)"

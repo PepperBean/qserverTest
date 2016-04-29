@@ -1,21 +1,26 @@
 <ion-view view-title="mentors">
-    <ion-content class="padding">
-        <div>
-            <div class="headpic">
-                <div class="headpicmid" ng-style="headPW" ng-repeat="m in mentorsInfo">
-                    <img ng-src="{{m.imgPath}}"
-                         class="mentorsImg"
-                         ng-class="{'mentorsImgHovr':selectedM===$index}"
-                         ng-click="GetMentorInfo($index)"/>
-                </div>
+    <ion-content class="padding appBG">
+        <p style="text-align: center; font-size: 1.3rem;margin: 20px 0 30px 0">创新活动导师展示</p>
+        <div class="headpic">
+            <div class="headpicmid" ng-style="headPW" ng-repeat="m in mentorsInfo">
+                <img ng-src="{{m.imgPath}}"
+                     class="mentorsImg"
+                     ng-class="{'mentorsImgHovr':selectedM===$index}"
+                     ng-click="GetMentorInfo($index)"/>
             </div>
-            <div class="list">
-                <div class="item item-avatar appBG" style="border: 0">
-                    <img ng-src="{{selectedMentor.get('avatar').url()}}">
-                    <h2><span class="highLightText">{{selectedMentor.get('name')}}</span> |
-                        {{selectedMentor.get('department')}}</h2>
-                    <p>{{selectedMentor.get('company')}}</p>
-                </div>
+        </div>
+        <div class="list">
+            <div class="item item-avatar appBG" style="border: 0">
+                <img ng-src="{{selectedMentor.get('avatar').url()}}">
+                <h2><span class="highLightText">{{selectedMentor.get('name')}}</span> |
+                    {{selectedMentor.get('department')}}</h2>
+                <p>{{selectedMentor.get('company')}}</p>
+            </div>
+            <div class="splitter"></div>
+            <div style="padding: 10px;font-size: 14px">
+                <li>擅长领域：</li> <p class="mentorDes">{{selectedMentor.info.domain}}</p>
+                <li>导师宣言：</li><p class="mentorDes">{{selectedMentor.info.slogen}}</p>
+                <li>联系方式：</li> <p class="mentorDes">{{selectedMentor.info.contact}}</p>
             </div>
         </div>
     </ion-content>

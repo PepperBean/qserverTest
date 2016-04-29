@@ -35,7 +35,11 @@
                         style="border: none">
                     <img ng-src="{{c.get('userInfo').get('avatar').url()}}">
                     <h2>{{c.get('userInfo').get('name')}}</h2>
-                    <p>{{c.get('msg')}}</p>
+                    <p style="word-break: break-all !important;word-wrap:break-word !important;overflow: visible !important;white-space: normal !important;">{{c.get('msg')}}</p>
+                    <div ng-if="c.get('userInfo').id===$root.user.id"
+                         ng-click="deleteComment(c)"
+                         class="button-clear ion-android-delete"
+                         style="position:absolute;left: calc(100% - 30px);top: 0; color: red"></div>
                     <div class="splitter" style="position: absolute;width: 100%;left: 0;top: 90%; margin: 0"></div>
                 </div>
                 <!--<div class="item appBG" ng-repeat="c in $root.comments">-->
