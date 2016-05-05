@@ -3,12 +3,17 @@
  */
 var ctrlModule = angular.module('app.controllers', ['ionic', 'app.services', 'ngFileUpload', 'ksSwiper']);
 
-ctrlModule.controller('appCtrl', function ($scope, $rootScope, $state) {
+ctrlModule.controller('appCtrl', function ($scope, $rootScope, $state,$ionicHistory) {
     $scope.gotoMentors = function () {
         $state.go('mentors');
     };
 
     $scope.goHome = function () {
+        // $ionicHistory.nextViewOptions({
+        //     // disableAnimate: true,
+        //     disableBack: true,
+        //     historyRoot: true
+        // });
         $state.go('main');
     };
 
@@ -64,8 +69,11 @@ ctrlModule.controller('mainCtrl', function ($scope, $rootScope
         });
     }
 
+
+    // $scope.$on('$ionicView.afterEnter', function () {
+    //     $ionicHistory.clearHistory();
+    // });
     $scope.$on('$ionicView.enter', function () {
-        $ionicHistory.clearHistory();
         achSvr.getAllAchs().then(function (achs) {
             $scope.achs = achs;
             $timeout(function () {
@@ -285,8 +293,8 @@ ctrlModule.controller('commentsCtrl', function ($scope, $rootScope) {
         $scope.$parent.refreshmCommnets();
         $scope.$parent.refreshCommnets();
     });
-    $scope.deleteComment=function(c){
-        c.destroy().then(function(){
+    $scope.deleteComment = function (c) {
+        c.destroy().then(function () {
             $scope.$parent.refreshCommnets();
         })
     }
@@ -308,43 +316,43 @@ ctrlModule.controller('mentorsCtrl', function ($scope, userSvr) {
             imgPath: "./img/mentor1.jpg",
             mentorId: "561f64c500b07c4da6be1503"
             ,  // 许磊
-            domain:"产品创新、资源整合，创新推广",
-            slogen:"只有想不到，没有做不到",
-            contact:"58596541/13512951228 (手机号可加微信)"
+            domain: "产品创新、资源整合，创新推广",
+            slogen: "只有想不到，没有做不到",
+            contact: "58596541/13512951228 (手机号可加微信)"
 
         },
         {
             imgPath: "./img/mentor2.jpg",
             mentorId: "56270074ddb2084ab0eebda6"
             ,  // 张风柱
-            domain:"软硬件研发，产品设计",
-            slogen:"用最专业的技术知识，找出带给我感受最好的创新成果",
-            contact:"58596558/13682192958 (手机号可加微信)"
+            domain: "软硬件研发，产品设计",
+            slogen: "用最专业的技术知识，找出带给我感受最好的创新成果",
+            contact: "58596558/13682192958 (手机号可加微信)"
         },
         {
             imgPath: "./img/mentor3.jpg",
             mentorId: "5631dc1e60b25b79325e2885"
             ,  // 刘中胜
-            domain:"产品策划、整合推广",
-            slogen:"只有行动才可能有结果，不行动什么也没有，重要的是行动、行动、行动，重要的事情说三遍",
-            contact:"58596585/13388023769 (手机号可加微信)"
+            domain: "产品策划、整合推广",
+            slogen: "只有行动才可能有结果，不行动什么也没有，重要的是行动、行动、行动，重要的事情说三遍",
+            contact: "58596585/13388023769 (手机号可加微信)"
         },
         {
             imgPath: "./img/mentor4.jpg",
             mentorId: "563723a060b25b7932c26152"
             , //  马红娟
-            domain:"管理创新的亮点挖掘,应用效果展示",
-            slogen:"感受创新，用“新”体会",
-            contact:"58596571/13820854471 (手机号可加微信)"
+            domain: "管理创新的亮点挖掘,应用效果展示",
+            slogen: "感受创新，用“新”体会",
+            contact: "58596571/13820854471 (手机号可加微信)"
         }
         ,
         {
             imgPath: "./img/mentor5.jpg",
             mentorId: "56306c1800b0d1dbddef4d26"
             ,  // 胡雅秋
-            domain:"咨询相关",
-            slogen:"给我一个1，还你一个N。让我们一起发现小创新背后的N种价值",
-            contact:"58089311/18602256473 (手机号可加微信)"
+            domain: "咨询相关",
+            slogen: "给我一个1，还你一个N。让我们一起发现小创新背后的N种价值",
+            contact: "58089311/18602256473 (手机号可加微信)"
         }
     ];
     $scope.headPW = {
@@ -356,7 +364,7 @@ ctrlModule.controller('mentorsCtrl', function ($scope, userSvr) {
         .then(function (user) {
             if (!!user) {
                 $scope.selectedMentor = user;
-                $scope.selectedMentor.info=$scope.mentorsInfo[2];
+                $scope.selectedMentor.info = $scope.mentorsInfo[2];
                 $scope.lastIndex = 2;
                 $scope.selectedM = 2;
             }
@@ -374,9 +382,9 @@ ctrlModule.controller('mentorsCtrl', function ($scope, userSvr) {
             userSvr.getUserInfo($scope.mentorsInfo[index].mentorId)
                 .then(function (user) {
                     if (!!user) {
-                        $scope.$apply(function(){
+                        $scope.$apply(function () {
                             $scope.selectedMentor = user;
-                            $scope.selectedMentor.info=$scope.mentorsInfo[index];
+                            $scope.selectedMentor.info = $scope.mentorsInfo[index];
                             $scope.lastIndex = index;
                         })
                     }
