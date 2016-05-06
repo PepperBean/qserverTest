@@ -262,5 +262,15 @@ AV.Cloud.define('deleteUser', function (request, response) {
 
 });
 
+AV.Cloud.define('deleteFiles', function (request, response) {
+    var fileIds = request.params.fileIds;
+    var filesQuery = new AV.Query('_File');
+    filesQuery.containedIn('objectId', fileIds);
+    filesQuery.destroyAll().then(function () {
+        response.success();
+    }, function (err) {
+        response.error(err);
+    })
+});
 
 module.exports = AV.Cloud;
