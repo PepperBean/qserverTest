@@ -149,7 +149,7 @@ AV.Cloud.define('deleteUser', function (request, response) {
         return AV.Promise.error(err);
     });
 
-    var query = new AV.Query(employeeclass);
+    var query = new AV.Query("UserInfo");
     var t8 = query.get(empid, {
         success: function (employee) {
             var _user = employee.attributes.user;
