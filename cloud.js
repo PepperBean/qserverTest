@@ -16,11 +16,11 @@ AV.Cloud.define('deleteUser', function (request, response) {
 
 
     query.get(userId).then(function (user) {
-            var t1 = user.destroy().then(function () {
-                return AV.Promise.as();
-            }, function (err) {
-                return AV.Promise.error(err);
-            });
+            // var t1 = user.destroy().then(function () {
+            //     return AV.Promise.as();
+            // }, function (err) {
+            //     return AV.Promise.error(err);
+            // });
 
             var sQuery = new AV.Query('_Status');
             sQuery.equalTo("source", user);
@@ -46,9 +46,13 @@ AV.Cloud.define('deleteUser', function (request, response) {
                 return AV.Promise.error(err);
             });
 
-        
-            AV.Promise.when([t1, t2, t3, t4]).then(function () {
-                response.success();
+
+            AV.Promise.when([t2, t3, t4]).then(function () {
+                user.destroy().then(function () {
+                    response.success();
+                }, function (err) {
+                    response.error(err);
+                });
             }, function (err) {
                 response.error(err);
             })
