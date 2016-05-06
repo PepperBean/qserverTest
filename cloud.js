@@ -13,12 +13,46 @@ AV.Cloud.define('deleteUser', function (request, response) {
 
     var userId = request.params.userId;
     var query = new AV.Query('_User');
+
+
     query.get(userId).then(function (user) {
-            user.destroy().then(function () {
-                response.success('done');
+            var t1 = user.destroy().then(function () {
+                return AV.Promise.as();
+            }, function (err) {
+                return AV.Promise.error(err);
+            });
+
+            var sQuery = new AV.Query('_Status');
+            sQuery.equalTo("source", user);
+            var t2 = sQuery.destroyAll().then(function () {
+                return AV.Promise.as();
+            }, function (err) {
+                return AV.Promise.error(err);
+            });
+
+            var followerQuery = new AV.Query('_Follower');
+            followerQuery.equalTo('user', user);
+            var t3 = followerQuery.destroyAll().then(function () {
+                return AV.Promise.as();
+            }, function (err) {
+                return AV.Promise.error(err);
+            });
+
+            var followeeQuery = new AV.Query('_Followee');
+            followeeQuery.equalTo('user', user);
+            var t4 = followeeQuery.destroyAll().then(function () {
+                return AV.Promise.as();
+            }, function (err) {
+                return AV.Promise.error(err);
+            });
+
+        
+            AV.Promise.when([t1, t2, t3, t4]).then(function () {
+                response.success();
             }, function (err) {
                 response.error(err);
             })
+
         },
         function (err) {
             response.error(err);
