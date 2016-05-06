@@ -9,7 +9,7 @@ AV.Cloud.define('hello', function (request, response) {
 });
 
 
-AV.Cloud.defune('deleteUser', function (request, response) {
+AV.Cloud.define('deleteUser', function (request, response) {
     // 1.删除Post中 creator==user的纪录，每条Post删除参考services.js中的removePost函数;
     // 2.删除Comment中creator＝＝user的纪录；
     // 3.删除ActivityComment中creator＝＝user的纪录；
